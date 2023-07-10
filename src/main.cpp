@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "ip_addresses/ip_addresses.h"
 
 
