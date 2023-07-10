@@ -28,7 +28,7 @@ jobs:
         run: echo "${{ env.VERSION }}"
 
       - name: Build
-        run: bazel build //src:ip_filter_deb --define VERSION=${{ env.VERSION }}
+        run: bazel build --cxxopt=-std=c++14 //src:ip_filter_deb --define VERSION=${{ env.VERSION }}
 
       - name: Release
         uses: softprops/action-gh-release@v1
