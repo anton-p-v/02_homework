@@ -28,17 +28,15 @@ jobs:
         run: echo "${{ env.VERSION }}"
 
       - name: Build
-        run: bazel build //src:helloworld_cli_deb --define VERSION=${{ env.VERSION }}
+        run: bazel build //src:ip_filter_deb --define VERSION=${{ env.VERSION }}
 
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            bazel-bin/src/helloworld-0.0.${{ env.VERSION }}-Linux.deb
-            bazel-bin/src/helloworld_cli
+            bazel-bin/src/ip_filter-0.0.${{ env.VERSION }}-Linux.deb
 
-      # - name: Check
-      #   run: sudo apt-get install --yes ./bazel-bin/src/helloworld-0.0.${{ env.VERSION }}-Linux.deb
-
-      # - name: Run
-      #   run: helloworld_cli
+      - name: Check
+        run: |
+          sudo apt-get install --yes ./bazel-bin/src/ip_filter-0.0.${{ env.VERSION }}-Linux.deb
+          cat src/test-data.tsv | ip_filter | md5sum

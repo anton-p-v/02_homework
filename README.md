@@ -1,19 +1,17 @@
-# 01_homework
+# 02_homework
 
 
 build:
 ```
-bazel build --cxxopt=-std=c++14 //src:helloworld_cli --define VERSION=1
+bazel build --cxxopt=-std=c++14 //src:ip_filter --define VERSION=1
 ```
 
+run:
+```
+cat src/test-data.tsv | bazel-bin/src/ip_filter
+```
 
 build deb package:
 ```
-bazel build --cxxopt=-std=c++14 //src:helloworld_cli_deb --define VERSION=1
-```
-
-
-run version tests:
-```
-bazel test --cxxopt=-std=c++14 --test_output=all //src:version_test --define VERSION=1
+bazel build --cxxopt=-std=c++14 //src:ip_filter_deb --define VERSION=1
 ```
