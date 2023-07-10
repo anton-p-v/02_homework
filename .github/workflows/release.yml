@@ -39,4 +39,5 @@ jobs:
       - name: Check
         run: |
           sudo apt-get install --yes ./bazel-bin/src/ip_filter-0.0.${{ env.VERSION }}-Linux.deb
+          echo
           cat src/test-data.tsv | ip_filter | md5sum
