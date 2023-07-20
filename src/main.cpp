@@ -5,17 +5,17 @@
 
 struct CompareIpAddress {
   bool operator()(const IpAddress& ip_address, unsigned value) const {
-    return std::get<0>(ip_address) > value;
+    return ip_address[0] > value;
   }
   bool operator()(unsigned value, const IpAddress& ip_address) const {
-    return value > std::get<0>(ip_address);
+    return value > ip_address[0];
   }
 
-  bool operator()(const IpAddress& ip_address, std::pair<unsigned, unsigned> value) const {
-    return std::tie(std::get<0>(ip_address), std::get<1>(ip_address)) > std::tie(value.first, value.second);
+  bool operator()(const IpAddress& ip_address, std::array<unsigned, 2> value) const {
+    return std::array<unsigned, 2>{ip_address[0], ip_address[1]} > value;
   }
-  bool operator()(std::pair<unsigned, unsigned> value, const IpAddress& ip_address) const {
-    return std::tie(value.first, value.second) > std::tie(std::get<0>(ip_address), std::get<1>(ip_address));
+  bool operator()(std::array<unsigned, 2> value, const IpAddress& ip_address) const {
+    return value > std::array<unsigned, 2>{ip_address[0], ip_address[1]};
   }
 };
 
@@ -38,7 +38,7 @@ int main(int argc, char const *argv[]) {
     }
 
     {
-      const auto range = std::equal_range(ip_addresses.begin(), ip_addresses.end(), std::pair<unsigned, unsigned>{46u, 70u}, CompareIpAddress{});
+      const auto range = std::equal_range(ip_addresses.begin(), ip_addresses.end(), std::array<unsigned, 2>{46u, 70u}, CompareIpAddress{});
 
       for (auto it = range.first; it != range.second; ++it) {
         std::cout << *it << '\n';

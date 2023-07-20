@@ -24,7 +24,7 @@ IpAddresses ReadIpAddresses(std::istream& in) {
     in.ignore(1);
     in >> n4;
 
-    addresses.emplace_back(n1, n2, n3, n4);
+    addresses.push_back({n1, n2, n3, n4});
 
     in.ignore(kMaxStreamSize, '\n');
   }
@@ -34,13 +34,13 @@ IpAddresses ReadIpAddresses(std::istream& in) {
 
 std::ostream& operator<<(std::ostream& os, const IpAddress& ip_address) {
   os
-    << std::get<0>(ip_address)
+    << ip_address[0]
     << '.'
-    << std::get<1>(ip_address)
+    << ip_address[1]
     << '.'
-    << std::get<2>(ip_address)
+    << ip_address[2]
     << '.'
-    << std::get<3>(ip_address);
+    << ip_address[3];
 
   return os;  
 }

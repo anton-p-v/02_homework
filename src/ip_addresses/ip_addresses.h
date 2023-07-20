@@ -3,11 +3,11 @@
 #include <limits>
 #include <iostream>
 #include <string>
+#include <array>
 #include <vector>
-#include <tuple>
 
 
-using IpAddress = std::tuple<unsigned, unsigned, unsigned, unsigned>;
+using IpAddress = std::array<unsigned, 4>;
 using IpAddresses = std::vector<IpAddress>;
 
 IpAddresses ReadIpAddresses(std::istream& in);
